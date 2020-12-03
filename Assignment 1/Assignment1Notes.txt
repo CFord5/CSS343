@@ -1,0 +1,285 @@
+QUESTIONS:
+
+1) So we need an Array ADT but we can't use the 342 example or the STL. We also can't use vectors. Does that mean we use stacks? 
+   Is the Array an ADT or a data structure? "This project is to create the abstract data type (ADT) for a polynomial called Poly."
+
+2) What would be the best way to implement an Array ADT in this case? Do you use a class to implement it? LinkedList?
+
+3) Overloading the ostream?
+
+4) Constructor, class, and file names?
+
+
+Unhandled exception at 0x77F2A849 (ntdll.dll) in Assignment1.exe:
+ 0xC0000374: A heap has been corrupted (parameters: 0x77F65910). occurred
+
+	/*for (int i = 0; i < smallerSize; i++)
+	{
+		diffPoly.myArray[i] = this->myArray[i] - rhs.myArray[i];
+	}*/
+	/*for (int i = smallerSize; i < largerSize; i++)
+	{
+		if (largerSize == this->size)
+		{
+			diffPoly.myArray[i] = this->myArray[i];
+		}
+		else
+		{
+			diffPoly.myArray[i] = 0 - rhs.myArray[i];
+		}
+	}*/
+
+	int largerSize;
+	int smallerSize;
+	int leadingExponent;
+
+	if (this->size >= rhs.size)
+	{
+		largerSize = this->size;
+		smallerSize = rhs.size;
+		leadingExponent = this->myArray[size - 1];
+	}
+	else
+	{
+		largerSize = rhs.size;
+		smallerSize = this->size;
+		leadingExponent = rhs.myArray[size - 1];
+	}
+	Poly sumPoly(leadingExponent, largerSize - 1);
+
+	for (int i = 0; i < smallerSize; i++)
+	{
+		sumPoly.myArray[i] = this->myArray[i] + rhs.myArray[i];
+	}
+	for (int i = smallerSize; i < largerSize; i++)
+	{
+		if (largerSize == this->size)
+		{
+			sumPoly.myArray[i] = this->myArray[i];
+		}
+		else
+		{
+			sumPoly.myArray[i] = rhs.myArray[i];
+		}
+	}
+
+	Poly productPoly;
+	int largerSize;
+
+	if (this->size >= rhs.size)
+	{
+		largerSize = this->size;
+	}
+	else
+	{
+		largerSize = rhs.size;
+	}
+
+	for (int i = 0; i < largerSize; i++)
+	{
+		productPoly.myArray[i] = this->myArray[i] * rhs.myArray[i];
+	}
+	return productPoly;
+
+	int largerSize;
+
+	if (this->size >= rhs.size)
+	{
+		largerSize = this->size;
+	}
+	else
+	{
+		largerSize = rhs.size;
+	}
+
+	for (int i = 0; i < largerSize; i++)
+	{
+		this->myArray[i] += rhs.myArray[i];
+	}
+
+	return *this;
+
+	int largerSize;
+
+	if (this->size >= rhs.size)
+	{
+		largerSize = this->size;
+	}
+	else
+	{
+		largerSize = rhs.size;
+	}
+
+	for (int i = 0; i < largerSize; i++)
+	{
+		this->myArray[i] -= rhs.myArray[i];
+	}
+
+	return *this;
+
+	int largerSize;
+
+	if (this->size >= rhs.size)
+	{
+		largerSize = this->size;
+	}
+	else
+	{
+		largerSize = rhs.size;
+	}
+
+	for (int i = 0; i < largerSize; i++)
+	{
+		this->myArray[i] *= rhs.myArray[i];
+	}
+
+	return *this;
+
+	//New code
+	
+	/*int tempSize = (rhs.size + this->size);
+	int *tempArray = new int[tempSize];
+	for (int i = 0; i < tempSize; i++)
+	{
+		tempArray[i] = 0;
+	}
+	int larger = 0; 
+	int smaller = 0;
+	if (this->size > rhs.size)
+	{
+		larger = this->size;
+		smaller = rhs.size;
+	}
+	else
+	{
+		smaller = this->size;
+		larger = rhs.size;
+	}
+	for (int i = 0; i < larger; i++)
+	{
+		for (int j = 0; j < smaller; j++)
+		{
+			if (this->size > rhs.size)
+			{
+				tempArray[i + j] = this->myArray[i] * rhs.myArray[j];
+			}
+			else
+			{
+				tempArray[i + j] = this->myArray[j] * rhs.myArray[i];
+			}
+		}
+	}
+	this->size = tempSize;
+	delete[] this->myArray;
+	this->myArray = tempArray;
+	tempArray = NULL;
+	return *this;*/
+
+	//Working code v1
+	/*int largerSize = 0;
+	int smallerSize = 0;
+	int leadingExponent = 0;
+
+	if (this->size >= rhs.size)
+	{
+		largerSize = this->size;
+		smallerSize = rhs.size;
+		leadingExponent = this->myArray[size - 1];
+	}
+	else
+	{
+		largerSize = rhs.size;
+		smallerSize = this->size;
+		leadingExponent = rhs.myArray[size - 1];
+	}
+
+	Poly sumPoly(leadingExponent, largerSize - 1);
+
+	for (int i = 0; i < smallerSize; i++)
+	{
+		sumPoly.myArray[i] = this->myArray[i] + rhs.myArray[i];
+	}
+	for (int i = smallerSize; i < largerSize; i++)
+	{
+		if (largerSize == this->size)
+		{
+			sumPoly.myArray[i] = this->myArray[i];
+		}
+		else
+		{
+			sumPoly.myArray[i] = rhs.myArray[i];
+		}
+	}
+	return sumPoly;*/
+
+	//Backup code
+	/*if (this == &rhs)
+	{
+		return *this;
+	}
+	this->size = rhs.size;
+	this->myArray[this->size];
+	for (int i = 0; i < this->size; i++)
+	{
+		this->myArray[i] = rhs.myArray[i];
+	}
+	return *this;*/
+
+NOTES:
+
+-Polynomial ADT: anX^n + an-1X^n-1
+-One array for each polynomial
+-Index represents exponent
+-Array size has a relationship with a the highest order (highest order + 1)
+-Dynamically allocate initial memory in constructor (5,7) 5 coefficient of highest order term 7 (dynamically set to size of 8)
+-Size will have to increase if a higher exponent appears, don't need to make it smaller
+-Constructor not much
+-Shallow copies point to existing, deep copies generate another copy with elements copied into it
+-User can input in random order as long as pair (coefficient, order), end with -1, -1
+-Assume user put in right data type in right format
+-If user tries to access outside, show math?
+-No STL, data structure, implement by self, don't use vector, don't use existing class (35ish minutes in Panapto video)
+
+Dynamically allocating array, pointer to the head, uses [], STL would be vector
+
+For example, for the coefficient of a non-existent term, you could return zero.  
+
+***Fix setCoeff, +=, -=, *=
+
+EXAMPLE OUTPUT:
+
+Enter terms for polynomial A.  Enter a coefficient
+then exponent for each term. Enter -1 -1 to terminate.
+5 7 -4 3 10 1 -2 0 -1 -1
+Enter terms for polynomial B.  Enter a coefficient
+then exponent for each term. Enter -1 -1 to terminate.
+3 4 1 3 -1 -1
+
+//NOTE: THIS IS NOT A PART OF YOUR OUTPUT BUT MY COMMENT ABOUT THE INPUT I PROVIDE ABOVE. THIS IS JUST A WAY TO ENTER VALUES. THERE SHOULD BE MANY WAYS TO ENTER THE COEFFICIENT AND POWER PAIR IN DIFFERENT ORDERS
+
+
+A = +5x^7 -4x^3 +10x -2
+B = +3x^4 +1x^3
+
+Compute C = A + B:  +5x^7 +3x^4 -3x^3 +10x -2
+
+A is not == B
+A is not == B
+
+Compute  Z1 = A2 - B2:  +5x^7 -3x^4 -5x^3 +10x -2
+Compute  Z2 = B2 - A2:  -5x^7 +3x^4 +5x^3 -10x +2
+
+Compute  D = A * B - 15
+Before: D = +5x^7
+After:  D = +15x^11 +5x^10 -12x^7 -4x^6 +30x^5 +4x^4 -2x^3 -15
+
+Test assignment operators
+X = +15x^11 +5x^10 -12x^7 -4x^6 +30x^5 +4x^4 -2x^3 -15
+Y = -15x^11 -5x^10 +17x^7 +4x^6 -30x^5 -4x^4 -2x^3 +10x -2
+
+Get and Set coefficient
+coeff of subscript 0 of D is: -15
+Doing getCoeff for term -20000
+D = +50x^20000 +15x^11 +5x^10 -12x^7 -4x^6 +30x^5 +4x^4 -2x^3 +50
+
+Press any key to continue . . .

@@ -1,0 +1,14 @@
+Something involving the destructor/makeEmpty causing program to crash when exiting
+
+WHY WOULD THE DESTRUCTOR CALL A HELPER METHOD
+
+Make sure code different enough, well commented, no memory leaks
+
+https://stackoverflow.com/questions/19871550/binary-search-tree-assignment-operator
+
+makeEmpty and destructor work for T alone, copy constructor messed up
+
+Working way use Catherines code
+
+fix getHeightHelper by using reference variable to control high from parent method
+same for assignmentHelper
